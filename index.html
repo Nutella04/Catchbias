@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body{
+			background: #fae5aa;
+		}
+		.photo{
+			height: 50px;
+			width: 50px;
+			position: absolute;
+			display: none;
+			top: 0px;
+			left: 0px;
+			transition: 4s;
+			border-radius: 50%;
+		}
+		.box{
+			width: 900px;
+			margin-left: auto;
+			margin-right: auto;
+			display: none;
+			text-align: center;
+		}
+		.player{
+			width: 60px;
+			height: 50px;
+			position: absolute;
+			top: 560px;
+			left: 650px;
+			transition: 1s;
+		}
+		.btn{
+			width: 60px;
+			position: absolute;
+		}
+		.btn2{
+			width: 60px;
+			position: absolute;
+		}
+		.start{
+			width: 850px;
+			height: 450px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 70px;
+			background-image: url(start.jpg);
+			background-size: 100% 100%;
+		}
+		.startbtn {
+			width: 180px;
+			height: 50px;
+			text-align: center;
+			margin-top: 20px;
+			background: #d98129;
+			border-radius: 20px;
+			font-family: Arial;
+			color: white;
+			font-weight: bold;
+		}
+		.imgfin{
+			height: 140px;
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 90px;
+			background-size: 100% 100%;
+			background-image: url(fin5.jpg);
+			text-align: center;
+			padding-top: 275px;
+		}
+		.text{
+			font-family: Arial;
+		}
+	</style>
+</head>
+<body>
+	<div class="box" style="display: block;">
+		<div class="start"></div>
+		<button class="startbtn">START</button>
+	</div>
+	
+
+	<div class="box">
+		<img src="" class="photo" style="display: block;">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">	
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">
+		<img src="" class="photo">		
+
+		<img src="player.png" class="player">
+
+		<img src="right.png" class="btn" style="top: 560px; left: 1250px;">
+		<img src="left.png" class="btn" style="top: 560px; left: 1190px;">
+
+		<img src="right2.png" class="btn2" style="top: 590px; left: 1260px;">
+		<img src="left2.png" class="btn2" style="top: 590px; left: 1180px;">
+	</div>
+
+	<div class="box">
+		<div class="imgfin">
+			<h1 class="text"> Здравствуйте, боженька</h1>
+			<h2><span class="txtscore"></span>/20 </h2>
+		</div>
+
+	</div>
+	
+
+	<script type="text/javascript">
+		let start = document.querySelector(".start");
+		let startbtn = document.querySelector(".startbtn");
+		let photo = document.querySelectorAll(".photo");
+		let box = document.querySelectorAll(".box");
+		let player = document.querySelector(".player");
+		let pl_left = 650;
+		let pl_top = 560;
+		let uslovie1 = 800;
+		let uslovie2 = 850;
+		let uslovie3 = 0;
+		let uslovie4 = 0;		
+		let score = 0;
+		let btn = document.querySelectorAll(".btn");
+		let btn2 = document.querySelectorAll(".btn2");
+		let tope = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		let leftt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		let j = 1;
+
+		let text = document.querySelector(".text");
+		let txtscore = document.querySelector(".txtscore");
+		let massiv = ['Ну, ты старался', 'Неплохо', 'Молодец', 'Ого, да ты крут!!', 'МОНСТР!!!', 'Здравствуйте, Боженька'];
+		let imgfin = document.querySelector(".imgfin");
+
+		//Устанавливаю фотки
+		for (let i = 0; i < photo.length; i++) {
+			photo[i].src = i + ".jpg";
+		}
+
+		// Управление игроком
+		btn[0].onclick = function(){
+			pl_left = pl_left + 20;
+			uslovie3 = pl_left - 20;
+			uslovie4 = pl_left + 30;
+			player.style.left = pl_left + "px";
+		}
+		btn[1].onclick = function(){
+			pl_left = pl_left - 20;
+			uslovie3 = pl_left - 20;
+			uslovie4 = pl_left + 30;
+			player.style.left = pl_left + "px";
+		}
+		btn2[0].onclick = function(){
+			pl_left = pl_left + 80;
+			uslovie3 = pl_left - 20;
+			uslovie4 = pl_left + 30;
+			player.style.left = pl_left + "px";
+		}
+		btn2[1].onclick = function(){
+			pl_left = pl_left - 80;
+			uslovie3 = pl_left - 20;
+			uslovie4 = pl_left + 30;
+			player.style.left = pl_left + "px";
+		}
+
+
+		//Рандомайзер
+		let random = function(){
+			let rand = Math.random()*860;
+			let num = Math.round(rand);
+			return num;
+		}
+
+
+		startbtn.onclick = function(){
+			box[0].style.display = 'none';
+			box[1].style.display = 'block';
+			//Рандомайзер дает значение нахождения яблок по оси x
+			for (let i = 0; i < leftt.length; i++) {
+				leftt[i] = random() + 220;
+				photo[i].style.left = leftt[i] + "px";			
+			}
+			// Первое яблоко падает
+			let down0 = function(){
+				tope[0] = tope[0] + 70;
+				
+				if (tope[0] >= 890) {
+					photo[0].style.display = 'none';
+				}
+				if (tope[0] <= uslovie2 && tope[0] >= uslovie1 && leftt[0] <= uslovie4 && leftt[0] >= uslovie3) {
+					photo[0].style.display = 'none';
+					score = score + 1;
+				}
+
+				photo[0].style.top = tope[0] + "px";
+			}			
+			setInterval(down0, 700);
+
+					
+			// Появление остальных яблок
+			let poyav = function(j){
+				photo[j].style.display = "block";			
+				tope[j] = 0;
+				photo[j].style.top = tope[j] + "px";
+
+				//Типа яблоки падают
+				let down = function(){			
+					tope[j] = tope[j] + 70;
+					photo[j].style.top = tope[j] + "px";
+					if (tope[j] >= 890) {
+						photo[j].style.display = "none"
+					}
+					if (tope[j] <= uslovie2 && tope[j] >= uslovie1 && leftt[j] <= uslovie4 && leftt[j] >= uslovie3) {
+						photo[j].style.display = 'none';
+						score = score + 1;
+					}
+				}		
+				setInterval(down, 700);
+			}
+
+			let n = 1
+			let give = function(){
+				poyav(n);
+				n = n + 1;
+			}
+			setInterval(give, 3500);
+
+			let finish = function(){
+				box[2].style.display = 'block';
+				txtscore.innerHTML = score;
+				if (score >= 0 && score <= 5) {
+					text.innerHTML = massiv[0];
+					imgfin.style.backgroundImage = "url(fin0.jpg)";
+					imgfin.style.color = "#f2e5d8";
+					imgfin.style.width = "590px";
+					imgfin.style.height = "120px";
+				}
+				if (score >= 6 && score <= 10) {
+					text.innerHTML = massiv[1];
+					imgfin.style.backgroundImage = "url(fin1.jpg)";
+					imgfin.style.color = "#402307";
+				}
+				if (score >= 11 && score <= 15) {
+					text.innerHTML = massiv[2];
+					imgfin.style.backgroundImage = "url(fin2.jpg)";
+					imgfin.style.color = "#dfe3eb";
+				}
+				if (score >= 16 && score <= 17) {
+					text.innerHTML = massiv[3];
+					imgfin.style.backgroundImage = "url(fin3.jpg)";
+					imgfin.style.color = "#ad2207";
+				}
+				if (score >= 18 && score <= 19) {
+					text.innerHTML = massiv[4];
+					imgfin.style.backgroundImage = "url(fin4.jpg)";
+					imgfin.style.color = "#541205";
+					imgfin.style.width = "630px";
+					imgfin.style.height = "120px";
+				}
+				if (score == 20) {
+					text.innerHTML = massiv[5];
+					imgfin.style.backgroundImage = "url(fin5.jpg)";
+					imgfin.style.color = "#e3b73d";
+				}
+			}
+
+			setTimeout(finish, 76000);
+		}
+				
+
+	</script>
+</body>
+</html>
